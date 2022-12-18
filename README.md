@@ -22,16 +22,16 @@ Simply unzip 'countingSheepPSG' and add to Matlab path.
 
 ## Usage
 
-### SLEEP SCORING KEYBORAD SHORTCUTS:
+### Sleep Scoring Keyboard Shortcuts:
 
-0 - Wake
-1 - NREM 1
-2 - NREM 2
-3 - SWS
-4 - REM
-. - Unscored
+* 0 - Wake
+* 1 - NREM 1
+* 2 - NREM 2
+* 3 - SWS
+* 4 - REM
+* . - Unscored
 
-### EVENT MARKING MODE:
+### Event Marking Mode:
 
 * Single point events can be created using single-click
 * Events with a duration can be created using single-click (start) + shift-click (end)
@@ -51,11 +51,13 @@ A revision of sleepSMG. sleepSMG originally developed by:
 Stephanie Greer and Jared Saletin
 Walker Lab, UC Berekeley, 2011
 https://sleepsmg.sourceforge.net
+
 https://www.jaredsaletin.org/hume
 
 ## Contact 
 
 https://socialsciences.uottawa.ca/sleep-lab/
+
 sfogel@uottawa.ca
 
 https://www.sleepwellpsg.com
@@ -63,4 +65,5 @@ https://www.sleepwellpsg.com
 ## License
 
 Copyright (C) Sleep Well, 2022.
+
 See the GNU General Public License v3.0 for more details.
