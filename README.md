@@ -40,16 +40,14 @@ Note: keyboard shortcuts do not work in event marking mode
     
 ## Authors
 
-Sleep Well & Stuart Fogel
-Stuart Fogel
-School of Psychology, University of Ottawa, Canada
-uOttawa Sleep Research Laboratory
-https://socialsciences.uottawa.ca/sleep-lab/
-sfogel@uottawa.ca
+Sleep Well & Stuart Fogel.
+Stuart Fogel.
+School of Psychology, University of Ottawa, Canada.
+uOttawa Sleep Research Laboratory.
 
 A revision of sleepSMG. sleepSMG originally developed by:
-Stephanie Greer and Jared Saletin
-Walker Lab, UC Berekeley, 2011
+Stephanie Greer and Jared Saletin.
+Walker Lab, UC Berekeley, 2011.
 https://sleepsmg.sourceforge.net
 
 https://www.jaredsaletin.org/hume
