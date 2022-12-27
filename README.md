@@ -58,5 +58,5 @@ sfogel@uottawa.ca
 
 ## License
 
-Copyright (C) Sleep Well, 2022.  
+Copyright (C) Sleep Well & Stuart Fogel, 2022.  
 See the GNU General Public License v3.0 for more details.
