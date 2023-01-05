@@ -1,16 +1,16 @@
 # Counting Sheep PSG
 
-EEGlab-compatible sleep scoring and event marking
+EEGLAB-compatible sleep scoring, signl processing and event marking
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.  
 
 ## Prerequisites
 
 Mac, PC and Linux compatible.  
-Designed for use with EEGlab 2019 or later (https://eeglab.org) on Matlab R2019a.  
-For use on continuous eeglab datasets (*.set).  
+Designed for use with EEGLAB 2019 or later (https://eeglab.org) on Matlab R2019a.  
+For use on continuous EEGLAB datasets (*.set).  
 
 Works best if recording includes (in the EEG.event structure):  
 * Recording start time event (at first data point)
@@ -18,9 +18,16 @@ Works best if recording includes (in the EEG.event structure):
 
 ## Installing
 
-Simply unzip 'countingSheepPSG' and add to Matlab path.
+Simply unzip 'countingSheepPSG' and add to Matlab path.  
+Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB GUI integration.  
 
 ## Usage
+
+### Supported Data Formats:
+
+* EEGLAB Datasets
+* European Data Format (EDF)
+* Brain Products
 
 ### Sleep Scoring Keyboard Shortcuts:
 
@@ -36,7 +43,20 @@ Simply unzip 'countingSheepPSG' and add to Matlab path.
 * Single point events can be created using single-click
 * Events with a duration can be created using single-click (start) + shift-click (end)
 * Single-click existing event to select for Delete
-Note: keyboard shortcuts do not work in event marking mode
+* Note: keyboard shortcuts do not work in event marking mode
+
+### Signal processing (using built-in EEGlab funcitons)
+
+* downsampling
+* filtering
+* re-refenrencing
+* channel edit
+
+### Automatic Event Detection:
+
+* Automatic movement artifact detection
+* Automatic spindle detection (using EEGlab 'detect_spindles' plugin)
+* Automatic slow wave detection (using EEGlab 'PAA' plugin)
     
 ## Authors
 
@@ -58,5 +78,5 @@ sfogel@uottawa.ca
 
 ## License
 
-Copyright (C) Sleep Well & Stuart Fogel, 2022.  
+Copyright (C) Stuart Fogel & Sleep Well, 2022.  
 See the GNU General Public License v3.0 for more details.
