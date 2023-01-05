@@ -45,7 +45,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * Single-click existing event to select for Delete
 * Note: keyboard shortcuts do not work in event marking mode
 
-### Signal processing (using built-in EEGlab funcitons)
+### Signal processing (using built-in EEGlab functions)
 
 * downsampling
 * filtering
