@@ -1,6 +1,6 @@
 # Counting Sheep PSG
 
-EEGLAB-compatible sleep scoring, signl processing and event marking
+EEGLAB-compatible sleep scoring, signal processing and event marking
 
 ## Getting Started
 
@@ -42,7 +42,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 
 * Single point events can be created using single-click
 * Events with a duration can be created using single-click (start) + shift-click (end)
-* Single-click existing event to select for Delete
+* Single-click existing event to select for delete
 * Note: keyboard shortcuts do not work in event marking mode
 
 ### Signal processing (using built-in EEGlab functions)
