@@ -1,4 +1,4 @@
-function varargout = git(varargin)
+function varargout = cspsg_git(varargin)
 
 % GIT Execute a git command.
 %

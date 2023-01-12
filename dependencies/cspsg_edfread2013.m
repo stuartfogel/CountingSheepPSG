@@ -1,4 +1,5 @@
-function [hdr, record] = edfread(fname, varargin)
+function [hdr, record] = cspsg_edfread2013(fname, varargin)
+
 % Read European Data Format file into MATLAB
 %
 % [hdr, record] = edfread(fname)

@@ -1,4 +1,4 @@
-function generateSleepReport()
+function cspsg_generateSleepReport()
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -41,6 +41,7 @@ function generateSleepReport()
    'MultiSelect', 'on');
 if isequal(filename,0)
    disp('User selected Cancel');
+   return
 else
    if ischar(filename) % only one file was selected
         filename = cellstr(filename); % put the filename in the same cell structure as multiselect
@@ -50,6 +51,9 @@ end
 % Select output directory
 disp('Select a directory to save the results.');
 resultDir = uigetdir('', 'Select a directory to save the results');
+if resultDir == 0
+    return
+end
 
 % create empty structure
 summaryTable = struct('ID',cell(1,length(filename)), ...
