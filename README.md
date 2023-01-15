@@ -23,6 +23,10 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 
 ## Usage
 
+* Loads an EEGlab PSG dataset
+* Customize display montage in:
+* ~/montages/sleep_montage_default.m (rename and save to new file)
+
 ### Supported Data Formats:
 
 * EEGLAB Datasets
