@@ -1,6 +1,6 @@
 # Counting Sheep PSG
 
-EEGLAB-compatible sleep scoring, signal processing and event marking
+EEGLAB-compatible manual sleep stage scoring, signal processing and event marking for polysomnographic (PSG) data
 
 ## Getting Started
 
