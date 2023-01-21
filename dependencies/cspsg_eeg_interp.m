@@ -62,7 +62,7 @@ EEG = ORIEEG;
 % check channel structure
 tmplocs = ORIEEG.chanlocs;
 if isempty(tmplocs) || isempty([tmplocs.X])
-    error('Interpolation require channel location');
+    error('Interpolation requires channel location');
 end
 
 % get channel indices for interp
