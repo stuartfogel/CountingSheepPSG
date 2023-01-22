@@ -65,7 +65,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
     
 ## Authors
 
-Sleep Well & Stuart Fogel.  
+Stuart Fogel & Sleep Well.  
 School of Psychology, University of Ottawa, Canada.  
 uOttawa Sleep Research Laboratory.  
 
