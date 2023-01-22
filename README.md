@@ -54,7 +54,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * interpolate bad channels
 * downsampling
 * filtering
-* re-refenrencing
+* re-referencing
 * channel edit
 
 ### Automatic Event Detection:
