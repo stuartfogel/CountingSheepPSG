@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 Mac, PC and Linux compatible.  
-Designed for use with EEGLAB 2019 or later (https://eeglab.org) on Matlab R2019a.  
+Designed for use with EEGLAB 2020 or later (https://eeglab.org) on Matlab R2019a.  
 For use on continuous EEGLAB datasets (*.set).  
 
 Works best if recording includes (in the EEG.event structure):  
