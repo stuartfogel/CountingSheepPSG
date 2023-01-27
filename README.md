@@ -2,6 +2,8 @@
 
 EEGLAB-compatible manual sleep stage scoring, signal processing and event marking for polysomnographic (PSG) data
 
+<img width="600" alt="CS-PSG" src="https://user-images.githubusercontent.com/8634128/215093413-6b2fe2fe-0298-4ebc-8ed5-f337930157f1.png">
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.  
