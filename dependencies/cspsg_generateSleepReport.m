@@ -61,6 +61,9 @@ function cspsg_generateSleepReport(app)
 % ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 % THE POSSIBILITY OF SUCH DAMAGE.
 %
+% Counting Sheep PSG is intended for research purposes only. Any commercial 
+% or medical use of this software and source code is strictly prohibited.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if nargin < 1 
