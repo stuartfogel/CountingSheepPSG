@@ -87,6 +87,7 @@ ylim([min(StageTimes)-1 max(StageTimes)+1]) % upper and lower limits of y-axis t
 set(gca, 'YDir', 'reverse') % reverse the y-axis
 yticklabels([' ', {stageLabels{:}}, ' ']) % label y-axis tick marks
 xlim([1 EEG.times(end)]) % set upper and lower limits of x-axis to fit EEG.times
+colorbar('off')
 
 % labels
 title('Hypnogram', 'fontweight', 'bold', 'fontsize', 16); % figure title
