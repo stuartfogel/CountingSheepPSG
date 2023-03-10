@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 Mac, PC and Linux compatible.  
-Designed for use with EEGLAB 2020 or later (https://eeglab.org) on Matlab R2019a.  
+Designed for use with EEGLAB 2020 or later (https://eeglab.org) on Matlab R2020b or later.  
 For use on continuous EEGLAB datasets (*.set).  
 
 Works best if recording includes (in the EEG.event structure):  
@@ -25,13 +25,13 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 
 ## Usage
 
-* Loads an EEGlab PSG dataset
 * Customize display montage in:
 * ~/montages/sleep_montage_default.m (rename and save to new file)
+* Loads an EEGlab PSG dataset for signal preprocessing and annnotation
 
 ### Supported Data Formats:
 
-* EEGLAB Datasets
+* EEGLAB Datasets (default)
 * European Data Format (EDF)
 * Brain Products Format (VHDR)
 
@@ -46,10 +46,10 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 
 ### Event Marking Mode:
 
-* Single point events can be created using single-click
-* Events with a duration can be created using single-click (start) + shift-click (end)
-* Single-click existing event to select for delete
-* Note: keyboard shortcuts do not work in event marking mode
+* Single-point events can be created using single mouse click
+* Events with a duration can be created using mouse click-and-drag
+* Enable 'all channels' mode to mark events without a channel
+* Single-click existing event to select/deselect for delete
 
 ### Signal processing (using built-in EEGlab functions)
 
@@ -57,13 +57,14 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * downsampling
 * filtering
 * re-referencing
-* channel edit
+* channel edit (beta)
 
 ### Automatic Event Detection:
 
 * Automatic movement artifact detection
 * Automatic spindle detection (using EEGlab 'detect_spindles' plugin)
 * Automatic slow wave detection (using EEGlab 'PAA' plugin)
+* Automatic rapid eye movement detection (coming soon...)
     
 ## Authors
 

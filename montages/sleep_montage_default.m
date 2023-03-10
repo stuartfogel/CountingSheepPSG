@@ -1,5 +1,9 @@
 function [electrodes , colors] = sleep_montage_default(app)
 
+%% IMPORTANT: DO NOT MODIFY, MOVE, DELETE OR RENAME THIS FILE
+% USE THIS FILE AS A TEMPLATE TO MANUALLY CREATE NEW MONTAGES
+% Create a new montage by 'saving as' a new file, and then, modify below
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % User-defined scoring montage settings required by countingSheep
