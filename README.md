@@ -50,7 +50,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * Single-point events can be created using single mouse click
 * Events with a duration can be created using mouse click-and-drag
 * Enable 'all channels' mode to mark events without a channel
-* Single-click existing event to select/deselect for delete
+* Single-click existing event to select/deselect for delete/merge
 
 ### Signal processing (using built-in EEGlab functions)
 
