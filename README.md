@@ -43,6 +43,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * 3 - SWS
 * 4 - REM
 * . - Unscored
+* backspace/delete - delete seelcted event(s)
 
 ### Event Marking Mode:
 
