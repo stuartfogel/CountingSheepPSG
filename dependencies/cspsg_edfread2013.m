@@ -71,7 +71,7 @@ function [hdr, record] = cspsg_edfread2013(fname, varargin)
 % conditions, data were being improperly written to the 'records' variable.
 % Thanks to Hisham El Moaqet for reporting the problem and for sharing a
 % file that helped me track it down.)
-% 
+%
 % 5/22/13 Enabled import of a user-selected subset of signals. Thanks to
 % Farid and Cindy for pointing out the deficiency. Also fixed the import of
 % signals that had "bad" characters (spaces, etc) in their names.
@@ -199,7 +199,7 @@ if nargout > 1 || assignToVariables
     % Scale data (linear scaling)
     scalefac = (hdr.physicalMax - hdr.physicalMin)./(hdr.digitalMax - hdr.digitalMin);
     dc = hdr.physicalMax - scalefac .* hdr.digitalMax;
-    
+
     % RECORD DATA REQUESTED
     tmpdata = struct;
     for recnum = 1:hdr.records
@@ -221,11 +221,11 @@ if nargout > 1 || assignToVariables
     hdr.digitalMax = hdr.digitalMax(targetSignals);
     hdr.prefilter = hdr.prefilter(targetSignals);
     hdr.transducer = hdr.transducer(targetSignals);
-    
+
     record = zeros(numel(hdr.label), hdr.samples(1)*hdr.records);
     % NOTE: 5/6/13 Modified for loop below to change instances of hdr.samples to
     % hdr.samples(ii). I think this underscored a problem with the reader.
-    
+
     disp('Step 2 of 2: Parsing data...');
     recnum = 1;
     for ii = 1:hdr.ns
@@ -234,6 +234,8 @@ if nargout > 1 || assignToVariables
             for jj = 1:hdr.records
                 try
                     record(recnum, ctr : ctr + hdr.samples(ii) - 1) = tmpdata(jj).data{ii};
+                catch
+                    error('Unexpected error')
                 end
                 ctr = ctr + hdr.samples(ii);
             end
@@ -247,6 +249,8 @@ if nargout > 1 || assignToVariables
         for ii = 1:numel(hdr.label)
             try
                 eval(['assignin(''caller'',''',hdr.label{ii},''',record(ii,:))'])
+            catch
+                error('Unexpected error')
             end
         end
         record = [];
