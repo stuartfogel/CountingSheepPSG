@@ -1,6 +1,6 @@
 # Counting Sheep PSG
 
-EEGLAB-compatible manual sleep stage scoring, signal processing and event marking for polysomnographic (PSG) data
+EEGLAB-compatible manual sleep stage scoring, signal processing and event marking for polysomnographic (PSG) data in MATLAB.
 
 ![screenshot](https://user-images.githubusercontent.com/8634128/219664342-3e338ef9-6ed1-4884-b0b8-6aa0997209c1.jpg)
 
