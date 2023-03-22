@@ -97,11 +97,14 @@ if nargin < 3
     error('eegplugin_countingSheepPSG requires 3 arguments');
 end
 
-% add plugin folder to path
+% add plugin folders to path
 if exist('pop_countingSheepPSG.m','file')
     p = which('eegplugin_countingSheepPSG');
-    p = p(1:findstr(p,'eegplugin_countingSheepPSG.m')-1);
-    addpath(p);
+    p = p(1:strfind(p,'eegplugin_countingSheepPSG.m')-1);
+    s1 = [p 'dependencies' filesep];
+    s2 = [p 'icons' filesep];
+    s3 = [p 'montages' filesep];
+    addpath(p,s1,s2,s3);
 end
 
 % find tools menu

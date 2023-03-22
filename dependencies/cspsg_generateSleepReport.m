@@ -67,7 +67,6 @@ function cspsg_generateSleepReport(app)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if nargin < 1 
-
     % Select countingSheep output files to process
     [filename,pathname] = uigetfile('*.mat', ...
        'Select One or More Files', ...
@@ -80,14 +79,12 @@ if nargin < 1
             filename = cellstr(filename); % put the filename in the same cell structure as multiselect
        end
     end
-    
     % Select output directory
     disp('Select a directory to save the results.');
     resultDir = uigetdir('', 'Select a directory to save the results');
     if resultDir == 0
         return
     end
-
 else
     filename = cellstr(app.handles.EEG.filename); % put the filename in the same cell structure as multiselect
     pathname = app.handles.EEG.filepath;
@@ -126,7 +123,7 @@ for nfile = 1:length(filename)
     if nargin < 1
         % load countingSheep output file
         disp(['loading data from file: ' char(filename(nfile)) '...'])
-        load([pathname filename{nfile}])
+        load([pathname filename{nfile}],'stageData')
     end
     % ID
     summaryTable(nfile).ID = filename{nfile}(1:end-4);
@@ -182,8 +179,11 @@ for nfile = 1:length(filename)
 end
 
 % Save output file
-disp(['Sleep Architecture results saved to: ' [resultDir 'CountingSheep_Sleep_Architecture_Data_' datestr(now, 'dd-mmm-yyyy-hh-MM') '.xlsx']])
-writetable(struct2table(summaryTable),[resultDir 'CountingSheep_Sleep_Architecture_Data_' datestr(now, 'dd-mmm-yyyy-hh-MM') '.xlsx'],'Sheet','summaryTable');
+timeStamp = strrep(datestr(datetime("now")),' ','-');
+timeStamp = strrep(timeStamp,':','-');
+disp(['Sleep Architecture results saved to: ' [resultDir 'CountingSheep_Sleep_Architecture_Data_' timeStamp '.xlsx']])
+writetable(struct2table(summaryTable),[resultDir 'CountingSheep_Sleep_Architecture_Data_' timeStamp '.xlsx'],'Sheet','summaryTable');
+clear filename pathname resultDir timeStamp summaryTable 
 disp('Sleep report generation complete!')
 
 end
