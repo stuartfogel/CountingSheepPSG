@@ -7,14 +7,16 @@ function [EEG, com] = pop_countingSheepPSG(EEG)
 % montage and load or import new dataset.
 %
 % Usage:
-%   >>  EEGOUT = pop_countingSheepPSG; % pop up main app
-%   >>  EEGOUT = pop_countingSheepPSG(EEG); % create montage and load
+%   >>  pop_countingSheepPSG; % pop up main app
+%   >>  pop_countingSheepPSG(EEG); % create montage and load
 %
 % Inputs:
 %   'EEG'   - EEG dataset structure
 %    
 % Outputs:
-%   EEGOUT  - EEG dataset structure
+%   EEG  - EEG dataset structure
+%   Note: EEG output adssigned to base workspace internally from app using 
+%   'assignin'.
 %
 % See also: 
 %   countingSheepPSG, pop_countingSheepPSG, eeglab
