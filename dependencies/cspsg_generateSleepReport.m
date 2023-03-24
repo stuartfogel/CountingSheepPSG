@@ -82,6 +82,7 @@ if nargin < 1
     % Select output directory
     disp('Select a directory to save the results.');
     resultDir = uigetdir('', 'Select a directory to save the results');
+    resultDir = [resultDir filesep];
     if resultDir == 0
         return
     end

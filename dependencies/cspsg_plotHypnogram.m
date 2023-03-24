@@ -44,7 +44,6 @@ EEG = app.handles.EEG;
 stageLabels = app.handles.userStageNames; % labels of sleep stage epoch, default: {{'W'},{'REM'},{'N1'},{'N2'},{'SWS'},{'Unscored'}}. NOTE: order important for plotting
 
 %% find stage labels and recode
-
 % find stages
 StageTimes = zeros(1,length(EEG.times)); % times for length of recording.
 StageTimes(StageTimes == 0) = 6; % change zeros to unscored = 6
@@ -55,7 +54,6 @@ stageIndexN2 = find(strcmp(stages,stageLabels{3}));
 stageIndexN3 = find(strcmp(stages,stageLabels{4}));
 stageIndexR = find(strcmp(stages,stageLabels{5}));
 stageIndexU = find(strcmp(stages,stageLabels{6}));
-
 % replace with numerical code
 for nStage=1:length(stageIndexW)
     StageTimes(EEG.event(stageIndexW(nStage)).latency:EEG.event(stageIndexW(nStage)).latency+EEG.event(stageIndexW(nStage)).duration-1) = 1;
@@ -77,27 +75,24 @@ for nStage=1:length(stageIndexU)
 end
 
 %% plot hyponogram
-
 % plot the sleep stage data
 figure ('units', 'normalized', 'outerposition', [0 0 1 1]);
 plot(EEG.times,StageTimes, 'color',[0 0 0], 'LineWidth', 2);
-
 % set axes
 ylim([min(StageTimes)-1 max(StageTimes)+1]) % upper and lower limits of y-axis to fit stage labels
 set(gca, 'YDir', 'reverse') % reverse the y-axis
 yticklabels([' ', {stageLabels{:}}, ' ']) % label y-axis tick marks
 xlim([1 EEG.times(end)]) % set upper and lower limits of x-axis to fit EEG.times
 colorbar('off')
-
 % labels
-title('Hypnogram', 'fontweight', 'bold', 'fontsize', 16); % figure title
+title(['Hypnogram: ' EEG.setname], 'fontweight', 'bold', 'fontsize', 16, 'Interpreter', 'none'); % figure title
 xlabel('Time', 'fontweight', 'bold', 'fontsize', 16); % x-axis label
 ylabel('Sleep Stage', 'fontweight', 'bold', 'fontsize', 16); % y-axis label
 set(get(gca, 'YAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(get(gca, 'XAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(gca, 'LineWidth', 2); % adjust line width
 
-% save it
+%% Save it
 saveas(gcf,[EEG.filepath EEG.setname '_hypnogram.png'])
 
 end
