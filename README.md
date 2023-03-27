@@ -1,6 +1,6 @@
 # Counting Sheep PSG
 
-EEGLAB-compatible manual sleep stage scoring, signal processing and event marking for polysomnographic (PSG) data in MATLAB.
+EEGLAB-compatible manual sleep stage scoring, signal processing and event marking of polysomnographic (PSG) data for MATLAB.
 
 ![screenshot](https://user-images.githubusercontent.com/8634128/219664342-3e338ef9-6ed1-4884-b0b8-6aa0997209c1.jpg)
 
@@ -25,9 +25,9 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 
 ## Usage
 
-* Customize display montage in:
-* ~/montages/sleep_montage_default.m (rename and save to new file)
-* Loads an EEGlab PSG dataset for signal preprocessing and annnotation
+1. Customize display montage in:
+~/montages/sleep_montage_default.m (rename and save to new file)
+2. Loads an EEGlab PSG dataset for signal preprocessing and annnotation
 
 ### Supported Data Formats:
 
@@ -57,7 +57,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * interpolate bad channels
 * downsampling
 * filtering
-* re-referencing
+* re-referencing (beta)
 * channel edit (beta)
 
 ### Automatic Event Detection:
