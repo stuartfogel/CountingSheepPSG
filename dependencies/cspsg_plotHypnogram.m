@@ -39,60 +39,37 @@ function cspsg_plotHypnogram(app)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% User-defined stage labels
-EEG = app.handles.EEG;
+%% Get stage labels and recode
 stageLabels = app.handles.userStageNames; % labels of sleep stage epoch, default: {{'W'},{'REM'},{'N1'},{'N2'},{'SWS'},{'Unscored'}}. NOTE: order important for plotting
-
-%% find stage labels and recode
-% find stages
-StageTimes = zeros(1,length(EEG.times)); % times for length of recording.
-StageTimes(StageTimes == 0) = 6; % change zeros to unscored = 6
-stages = {EEG.event.type};
-stageIndexW = find(strcmp(stages,stageLabels{1}));
-stageIndexN1 = find(strcmp(stages,stageLabels{2}));
-stageIndexN2 = find(strcmp(stages,stageLabels{3}));
-stageIndexN3 = find(strcmp(stages,stageLabels{4}));
-stageIndexR = find(strcmp(stages,stageLabels{5}));
-stageIndexU = find(strcmp(stages,stageLabels{6}));
-% replace with numerical code
-for nStage=1:length(stageIndexW)
-    StageTimes(EEG.event(stageIndexW(nStage)).latency:EEG.event(stageIndexW(nStage)).latency+EEG.event(stageIndexW(nStage)).duration-1) = 1;
-end
-for nStage=1:length(stageIndexN1)
-    StageTimes(EEG.event(stageIndexN1(nStage)).latency:EEG.event(stageIndexN1(nStage)).latency+EEG.event(stageIndexN1(nStage)).duration-1) = 3;
-end
-for nStage=1:length(stageIndexN2)
-    StageTimes(EEG.event(stageIndexN2(nStage)).latency:EEG.event(stageIndexN2(nStage)).latency+EEG.event(stageIndexN2(nStage)).duration-1) = 4;
-end
-for nStage=1:length(stageIndexN3)
-    StageTimes(EEG.event(stageIndexN3(nStage)).latency:EEG.event(stageIndexN3(nStage)).latency+EEG.event(stageIndexN3(nStage)).duration-1) = 5;
-end
-for nStage=1:length(stageIndexR)
-    StageTimes(EEG.event(stageIndexR(nStage)).latency:EEG.event(stageIndexR(nStage)).latency+EEG.event(stageIndexR(nStage)).duration-1) = 2;
-end
-for nStage=1:length(stageIndexU)
-    StageTimes(EEG.event(stageIndexU(nStage)).latency:EEG.event(stageIndexU(nStage)).latency+EEG.event(stageIndexU(nStage)).duration-1) = 6;
-end
+stages = app.handles.stageData.stages;
+% recode to plot
+stageRecode(stages == 0) = 1;
+stageRecode(stages == 1) = 3;
+stageRecode(stages == 2) = 4;
+stageRecode(stages == 3) = 5;
+stageRecode(stages == 4) = 2;
+stageRecode(stages == 5) = 6;
 
 %% plot hyponogram
 % plot the sleep stage data
 figure ('units', 'normalized', 'outerposition', [0 0 1 1]);
-plot(EEG.times,StageTimes, 'color',[0 0 0], 'LineWidth', 2);
+plot(app.handles.stageData.stageTime,stageRecode, 'color',[0 0 0], 'LineWidth', 2);
 % set axes
-ylim([min(StageTimes)-1 max(StageTimes)+1]) % upper and lower limits of y-axis to fit stage labels
+ylim([min(stageRecode)-1 max(stageRecode)+1]) % upper and lower limits of y-axis to fit stage labels
 set(gca, 'YDir', 'reverse') % reverse the y-axis
-yticklabels([' ', {stageLabels{:}}, ' ']) % label y-axis tick marks
-xlim([1 EEG.times(end)]) % set upper and lower limits of x-axis to fit EEG.times
+yticklabels([' ', [stageLabels(1),stageLabels(5),stageLabels(2),stageLabels(3),stageLabels(4),stageLabels(6)], ' ']) % label y-axis tick marks
+xlim([1 app.handles.stageData.stageTime(end)]) % set upper and lower limits of x-axis to fit EEG.times
 colorbar('off')
 % labels
-title(['Hypnogram: ' EEG.setname], 'fontweight', 'bold', 'fontsize', 16, 'Interpreter', 'none'); % figure title
+title(['Hypnogram: ' app.handles.EEG.setname], 'fontweight', 'bold', 'fontsize', 16, 'Interpreter', 'none'); % figure title
 xlabel('Time', 'fontweight', 'bold', 'fontsize', 16); % x-axis label
 ylabel('Sleep Stage', 'fontweight', 'bold', 'fontsize', 16); % y-axis label
 set(get(gca, 'YAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(get(gca, 'XAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(gca, 'LineWidth', 2); % adjust line width
+highlight(gca, 2, 'EdgeColor','red', 'LineWidth',3) % higlight REM sleep
 
 %% Save it
-saveas(gcf,[EEG.filepath EEG.setname '_hypnogram.png'])
+saveas(gcf,[app.handles.EEG.filepath app.handles.EEG.setname '_hypnogram.png'])
 
 end
