@@ -182,9 +182,15 @@ end
 % Save output file
 timeStamp = strrep(datestr(datetime("now")),' ','-');
 timeStamp = strrep(timeStamp,':','-');
-disp(['Sleep Architecture results saved to: ' [resultDir 'CountingSheep_Sleep_Architecture_Data_' timeStamp '.xlsx']])
-writetable(struct2table(summaryTable),[resultDir 'CountingSheep_Sleep_Architecture_Data_' timeStamp '.xlsx'],'Sheet','summaryTable');
-clear filename pathname resultDir timeStamp summaryTable 
+if length(filename) == 1
+    oututFilename = filename{1}(1:end-4);
+    oututFilename = [oututFilename '_Sleep_Architecture_'];
+else
+    oututFilename = 'CountingSheep_Sleep_Architecture_';
+end
+disp(['Sleep Architecture results saved to: ' [resultDir oututFilename timeStamp '.xlsx']])
+writetable(struct2table(summaryTable),[resultDir oututFilename timeStamp '.xlsx'],'Sheet','summaryTable');
+clear filename pathname resultDir timeStamp summaryTable oututFilename
 disp('Sleep report generation complete!')
 
 end
