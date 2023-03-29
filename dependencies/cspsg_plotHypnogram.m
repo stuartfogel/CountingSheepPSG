@@ -67,7 +67,6 @@ ylabel('Sleep Stage', 'fontweight', 'bold', 'fontsize', 16); % y-axis label
 set(get(gca, 'YAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(get(gca, 'XAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(gca, 'LineWidth', 2); % adjust line width
-highlight(gca, 2, 'EdgeColor','red', 'LineWidth',3) % higlight REM sleep
 
 %% Save it
 saveas(gcf,[app.handles.EEG.filepath app.handles.EEG.setname '_hypnogram.png'])
