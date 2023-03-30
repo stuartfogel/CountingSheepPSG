@@ -2,8 +2,8 @@ function [EEG, com] = pop_countingSheepPSG(EEG)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% pop_countingSheepPSG() - EEGLAB plugin for sleep scoring, event marking 
-% and signal processing. If no arguments, pop up main app to create new 
+% pop_countingSheepPSG() - EEGLAB plugin for sleep scoring, event marking
+% and signal processing. If no arguments, pop up main app to create new
 % montage and load or import new dataset.
 %
 % Usage:
@@ -12,41 +12,42 @@ function [EEG, com] = pop_countingSheepPSG(EEG)
 %
 % Inputs:
 %   'EEG'   - EEG dataset structure
-%    
+%
 % Outputs:
 %   EEG  - EEG dataset structure
-%   Note: EEG output adssigned to base workspace internally from app using 
+%   Note: EEG output adssigned to base workspace internally from app using
 %   'assignin'.
 %
-% See also: 
+% See also:
 %   countingSheepPSG, pop_countingSheepPSG, eeglab
 %
 % REQUIREMENTS:
-% MATLAB version R2019a or later
-% EEGlab 2019 or later (https://eeglab.org)
+% MATLAB version R2020a or later
+% EEGlab 2020 or later (https://eeglab.org)
 %
 % USAGE:
-% Loads an EEGlab PSG dataset
 % Customize display montage in:
 % ~/montages/sleep_montage_default.m (rename and save to new file)
+% Loads an EEGlab PSG dataset
 %
 % Works best if recording includes:
 % - Recording start time event (at first data point)
 % - Lights Off and Lights On events
 %
-% SLEEP SCORING KEYBORAD SHORTCUTS:
+% Sleep scoring keyboard shortcuts:
 % 0 - Wake
 % 1 - NREM 1
 % 2 - NREM 2
 % 3 - SWS
 % 4 - REM
 % . - Unscored
+% backspace/delete - delete seelcted event(s)
 %
-% EVENT MARKING MODE:
-% Note: keyboard shortcuts do not work in event marking mode
-% Single point events can be created using single-click
-% Events with a duration can be created using single-click (start) + shift-click (end)
-% Single-click existing event to select for Delete
+% Event marking mode:
+% Single-point events can be created using single mouse click
+% Events with a duration can be created using mouse click-and-drag
+% Enable 'all channels' mode to mark events without a channel
+% Single-click existing event to select/deselect for delete/merge
 
 % Dec 28, 2022: Version 1.0
 %
@@ -87,7 +88,7 @@ function [EEG, com] = pop_countingSheepPSG(EEG)
 % ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 % THE POSSIBILITY OF SUCH DAMAGE.
 %
-% Counting Sheep PSG is intended for research purposes only. Any commercial 
+% Counting Sheep PSG is intended for research purposes only. Any commercial
 % or medical use of this software and source code is strictly prohibited.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -99,7 +100,10 @@ if nargin < 1
     return;
 end
 
-% launch Counting Sheep PSG
+% launch Counting Sheep PSG - uses App Designer instead of EEGLAB GUI
+% NOTE: App Designer does not permit output arguments!
+% However, when argin = EEG, countingSheepPSG will output EEG to base workspace using 'assignin' function.
+% EEG will then be output back to EEGLAB from pop function as expected.
 countingSheepPSG(EEG);
 com = sprintf('countingSheepPSG(%s);',inputname(1));
 

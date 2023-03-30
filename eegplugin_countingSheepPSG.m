@@ -11,7 +11,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 % Inputs:
 %   fig        - [integer] EEGLAB figure.
 %   trystrs    - [struct] "try" strings for menu callbacks.
-%   catchstrs  - [struct] "catch" strings for menu callbacks. 
+%   catchstrs  - [struct] "catch" strings for menu callbacks.
 %
 % See also:
 %   countingSheepPSG, pop_countingSheepPSG, eeglab
@@ -19,32 +19,33 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 % Dec 28, 2022: Version 1.0
 %
 % REQUIREMENTS:
-% MATLAB version R2019a or later
-% EEGlab 2019 or later (https://eeglab.org)
+% MATLAB version R2020a or later
+% EEGlab 2020 or later (https://eeglab.org)
 %
 % USAGE:
-% Loads an EEGlab PSG dataset
 % Customize display montage in:
 % ~/montages/sleep_montage_default.m (rename and save to new file)
+% Loads an EEGlab PSG dataset
 %
 % Works best if recording includes:
 % - Recording start time event (at first data point)
 % - Lights Off and Lights On events
 %
-% SLEEP SCORING KEYBORAD SHORTCUTS:
+% Sleep scoring keyboard shortcuts:
 % 0 - Wake
 % 1 - NREM 1
 % 2 - NREM 2
 % 3 - SWS
 % 4 - REM
 % . - Unscored
+% backspace/delete - delete seelcted event(s)
 %
-% EVENT MARKING MODE:
-% Note: keyboard shortcuts do not work in event marking mode
-% Single point events can be created using single-click
-% Events with a duration can be created using single-click (start) + shift-click (end)
-% Single-click existing event to select for Delete
-%
+% Event marking mode:
+% Single-point events can be created using single mouse click
+% Events with a duration can be created using mouse click-and-drag
+% Enable 'all channels' mode to mark events without a channel
+% Single-click existing event to select/deselect for delete/merge
+
 % Dec 28, 2022: Version 1.0
 %
 % https://socialsciences.uottawa.ca/sleep-lab/
@@ -84,7 +85,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 % ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 % THE POSSIBILITY OF SUCH DAMAGE.
 %
-% Counting Sheep PSG is intended for research purposes only. Any commercial 
+% Counting Sheep PSG is intended for research purposes only. Any commercial
 % or medical use of this software and source code is strictly prohibited.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
