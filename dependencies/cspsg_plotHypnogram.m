@@ -40,7 +40,6 @@ function cspsg_plotHypnogram(app)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Get stage labels and recode
-stageTime = app.handles.stageData.stageTime;
 stageLabels = app.handles.userStageNames; % labels of sleep stage epoch, default: {{'W'},{'REM'},{'N1'},{'N2'},{'SWS'},{'Unscored'}}. NOTE: order important for plotting
 stages = app.handles.stageData.stages;
 % recode to plot
@@ -50,31 +49,41 @@ stageRecode(stages == 2) = 4;
 stageRecode(stages == 3) = 5;
 stageRecode(stages == 4) = 2;
 stageRecode(stages == 5) = 6;
-stageTime(find(diff(stageRecode))+1) = stageTime(find(diff(stageRecode))); % shift time at stage differences so they are aligned vertically
+
+% convert to seconds for nicer / more conventional looking hypnogram plot
+nRecode = 1;
+stages = ones(length(stageRecode)*app.handles.stageData.win,1)';
+for nStage = 1:app.handles.stageData.win:length(stages)
+    stages(nStage:nStage+app.handles.stageData.win-1) = stageRecode(nRecode);
+    nRecode = nRecode + 1;
+end
+times = 1:1:length(stages);
 
 %% plot hyponogram
 % plot the sleep stage data
 figure('units', 'normalized', 'outerposition', [0 0 1 1]);
-plot(stageTime,stageRecode, 'color',[0 0 0], 'LineWidth', 2); hold;
+plot(times,stages, 'color',[0 0 0], 'LineWidth', 2); hold;
 % plot REM as thick line
-R = (stageRecode == 2)*2;
+R = (stages == 2)*2;
 R(R == 0) = NaN;
-plot(stageTime, R, 'color',[0 0 0], 'LineWidth', 16);
+plot(times, R, 'color',[0 0 0], 'LineWidth', 16);
 % set axes
-ylim([min(stageRecode)-1 max(stageRecode)+1]) % upper and lower limits of y-axis to fit stage labels
-set(gca, 'YDir', 'reverse') % reverse the y-axis
-yticklabels([' ', [stageLabels(1),stageLabels(5),stageLabels(2),stageLabels(3),stageLabels(4),stageLabels(6)], ' ']) % label y-axis tick marks
-xlim([0 stageTime(end-1)]) % set upper and lower limits of x-axis to fit EEG.times
-colorbar('off')
+ylim([min(stages)-1 max(stages)+1]); % upper and lower limits of y-axis to fit stage labels
+set(gca, 'YDir', 'reverse'); % reverse the y-axis
+yticklabels([' ', [stageLabels(1),stageLabels(5),stageLabels(2),stageLabels(3),stageLabels(4),stageLabels(6)], ' ']); % label y-axis tick marks
+xlim([0 times(end)]); % set upper and lower limits of x-axis to fit
+xticks(0:60:times(end));
+xticklabels(0:1:(times(end)/60));
+colorbar('off');
 % labels
 title(['Hypnogram: ' app.handles.EEG.setname], 'fontweight', 'bold', 'fontsize', 16, 'Interpreter', 'none'); % figure title
-xlabel('Time', 'fontweight', 'bold', 'fontsize', 16); % x-axis label
+xlabel('Time (min)', 'fontweight', 'bold', 'fontsize', 16); % x-axis label
 ylabel('Sleep Stage', 'fontweight', 'bold', 'fontsize', 16); % y-axis label
 set(get(gca, 'YAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(get(gca, 'XAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(gca, 'LineWidth', 2); % adjust line width
 
 %% Save it
-saveas(gcf,[app.handles.EEG.filepath app.handles.EEG.setname '_hypnogram.png'])
+saveas(gcf,[app.handles.EEG.filepath app.handles.EEG.setname '_hypnogram.png']);
 
 end
