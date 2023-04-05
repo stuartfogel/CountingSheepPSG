@@ -72,12 +72,12 @@ ylim([min(stages)-1 max(stages)+1]); % upper and lower limits of y-axis to fit s
 set(gca, 'YDir', 'reverse'); % reverse the y-axis
 yticklabels([' ', [stageLabels(1),stageLabels(5),stageLabels(2),stageLabels(3),stageLabels(4),stageLabels(6)], ' ']); % label y-axis tick marks
 xlim([0 times(end)]); % set upper and lower limits of x-axis to fit
-xticks(0:60:times(end));
-xticklabels(0:1:(times(end)/60));
+xticks(0:(60*60):times(end));
+xticklabels(0:1:(times(end)/(60*60)));
 colorbar('off');
 % labels
 title(['Hypnogram: ' app.handles.EEG.setname], 'fontweight', 'bold', 'fontsize', 16, 'Interpreter', 'none'); % figure title
-xlabel('Time (min)', 'fontweight', 'bold', 'fontsize', 16); % x-axis label
+xlabel('Time (hrs)', 'fontweight', 'bold', 'fontsize', 16); % x-axis label
 ylabel('Sleep Stage', 'fontweight', 'bold', 'fontsize', 16); % y-axis label
 set(get(gca, 'YAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
 set(get(gca, 'XAxis'), 'FontWeight', 'bold', 'fontsize', 16); % change font
