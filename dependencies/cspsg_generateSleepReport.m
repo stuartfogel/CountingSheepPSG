@@ -1,4 +1,4 @@
-function cspsg_generateSleepReport(app)
+function completed = cspsg_generateSleepReport(app)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -66,6 +66,7 @@ function cspsg_generateSleepReport(app)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+completed = 0;
 if nargin < 1 
     % Select countingSheep output files to process
     [filename,pathname] = uigetfile('*.mat', ...
@@ -82,9 +83,10 @@ if nargin < 1
     % Select output directory
     disp('Select a directory to save the results.');
     resultDir = uigetdir('', 'Select a directory to save the results');
-    resultDir = [resultDir filesep];
-    if resultDir == 0
+    if ~ischar(resultDir) && resultDir == 0
         return
+    else
+        resultDir = [resultDir filesep];
     end
 else
     filename = cellstr(app.handles.EEG.filename); % put the filename in the same cell structure as multiselect
@@ -187,9 +189,9 @@ else
     timeStamp = strrep(strrep(datestr(datetime("now")),' ','-'),':','-');
     oututFilename = ['SleepReport_' timeStamp '.xlsx'];
 end
-disp(['Sleep Architecture results saved to: ' [resultDir oututFilename]])
 writetable(struct2table(summaryTable),[resultDir oututFilename],'Sheet','summaryTable');
 clear filename pathname resultDir summaryTable oututFilename
-disp('Sleep report generation complete!')
+
+completed = 1;
 
 end
