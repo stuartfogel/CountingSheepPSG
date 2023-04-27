@@ -1,4 +1,4 @@
-function completed = cspsg_generateSleepReport(app)
+function completed = cspsg_generateSleepReport(app,filename,filepath)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -67,30 +67,15 @@ function completed = cspsg_generateSleepReport(app)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 completed = 0;
-if nargin < 1 
-    % Select countingSheep output files to process
-    [filename,pathname] = uigetfile('*.mat', ...
-       'Select One or More Files', ...
-       'MultiSelect', 'on');
-    if isequal(filename,0)
-       disp('User selected Cancel');
-       return
-    else
-       if ischar(filename) % only one file was selected
-            filename = cellstr(filename); % put the filename in the same cell structure as multiselect
-       end
+
+if nargin > 1 
+    if ischar(filename) % only one file was selected
+        filename = cellstr(filename); % put the filename in the same cell structure as multiselect
     end
-    % Select output directory
-    disp('Select a directory to save the results.');
-    resultDir = uigetdir('', 'Select a directory to save the results');
-    if ~ischar(resultDir) && resultDir == 0
-        return
-    else
-        resultDir = [resultDir filesep];
-    end
+    resultDir = [filepath filesep];
 else
     filename = cellstr(app.handles.EEG.filename); % put the filename in the same cell structure as multiselect
-    pathname = app.handles.EEG.filepath;
+    filepath = app.handles.EEG.filepath;
     resultDir = app.handles.EEG.filepath;
     stageData = app.handles.stageData;
 end
@@ -123,10 +108,10 @@ summaryTable = struct('ID',cell(1,length(filename)), ...
                       );
 
 for nfile = 1:length(filename)
-    if nargin < 1
+    if nargin > 1
         % load countingSheep output file
         disp(['loading data from file: ' char(filename(nfile)) '...'])
-        load([pathname filename{nfile}],'stageData')
+        load([filepath filesep filename{nfile}],'stageData')
     end
     % ID
     summaryTable(nfile).ID = filename{nfile}(1:end-4);
@@ -190,7 +175,7 @@ else
     oututFilename = ['SleepReport_' timeStamp '.xlsx'];
 end
 writetable(struct2table(summaryTable),[resultDir oututFilename],'Sheet','summaryTable');
-clear filename pathname resultDir summaryTable oututFilename
+clear filename filepath resultDir summaryTable oututFilename
 
 completed = 1;
 
