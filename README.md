@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 Mac, PC and Linux compatible.  
-Designed for use with EEGLAB 2022 or later (https://eeglab.org) on Matlab R2020b or later (R2022b or later preferred).  
+Designed for use with EEGLAB 2023 or later (https://eeglab.org) on Matlab R2020b or later (R2022b or later recommended).  
 For use on continuous EEGLAB datasets (*.set).  
 
 Works best if recording includes (in the EEG.event structure):  
@@ -59,12 +59,14 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * filtering
 * re-referencing (beta)
 * channel edit (beta)
+* Independent component analysis (ICA)
 
 ### Automatic Event Detection:
 
 * Automatic movement artifact detection
 * Automatic spindle detection (using EEGlab 'detect_spindles' plugin)
 * Automatic slow wave detection (using EEGlab 'PAA' plugin)
+* Spindle-slow wave coupling analysis (coming soon...)
 * Automatic rapid eye movement detection (coming soon...)
     
 ## Authors
