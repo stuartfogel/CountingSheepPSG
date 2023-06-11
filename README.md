@@ -60,6 +60,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * re-referencing (beta)
 * channel edit (beta)
 * Independent component analysis (ICA)
+* Power spectral analysis - FTT (beta)
 
 ### Automatic Event Detection:
 
