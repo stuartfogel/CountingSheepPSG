@@ -15,8 +15,8 @@ Designed for use with EEGLAB 2023 or later (https://eeglab.org) on Matlab R2020b
 For use on continuous EEGLAB datasets (*.set).  
 
 Works best if recording includes (in the EEG.event structure):  
-* Recording start time event (at first data point)
-* Lights Off and Lights On events
+* Recording start time event (at first data point).
+* Lights Off and Lights On events.
 
 ## Installing
 
@@ -25,9 +25,10 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 
 ## Usage
 
-1. Customize display montage in:
+1. Launch by typing 'countingSheepPSG' at command prompt.
+2. Customize display montage in:
 ~/montages/sleep_montage_default.m (rename and save to new file)
-2. Loads an EEGlab PSG dataset for signal preprocessing and annnotation
+3. Loads an EEGlab PSG dataset for signal preprocessing and annnotation.
 
 ### Supported Data Formats:
 
