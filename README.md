@@ -61,6 +61,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * re-referencing (beta)
 * channel edit (beta)
 * Independent component analysis (ICA)
+* Artifact Subspace Reconstruction (ASR)
 * Power spectral analysis - FTT (beta)
 
 ### Automatic Event Detection:
@@ -85,7 +86,7 @@ https://www.jaredsaletin.org/hume
 
 ## Contact 
 
-https://socialsciences.uottawa.ca/sleep-lab/  
+https://www.uottawa-sleeplab.ca  
 https://www.sleepwellpsg.com  
 sfogel@uottawa.ca  
 
