@@ -46,8 +46,14 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 % Enable 'all channels' mode to mark events without a channel
 % Single-click existing event to select/deselect for delete/merge
 
-% https://socialsciences.uottawa.ca/sleep-lab/
+% https://www.uottawa-sleeplab.ca
 % https://www.sleepwellpsg.com
+%
+% HOW TO CITE:
+% L.B. Ray, D. Baena & S.M. Fogel (2024). “Counting sheep PSG”: EEGLAB-compatible
+% open-source matlab software for signal processing, visualization, event marking
+% and staging of polysomnographic data, Journal of Neuroscience Methods, 407, 110162.
+% https://doi.org/10.1016/j.jneumeth.2024.110162.
 %
 % A revision of sleepSMG. sleepSMG originally developed by:
 % Stephanie Greer and Jared Saletin
@@ -89,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.4.5';
+vers = '1.4.4';
 
 % handle input arguments from EEGLAB
 if nargin < 3
