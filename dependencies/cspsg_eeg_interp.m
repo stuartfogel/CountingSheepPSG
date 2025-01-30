@@ -5,6 +5,7 @@ function EEG = cspsg_eeg_interp(ORIEEG, bad_elec, good_elec)
 % eeg_interp() - interpolate data channels
 %
 % 11-01-2023: Modified to work with Counting Sheep PSG.
+% 30-01-2025: Modified to interpolate multiple channels.
 % Stuart Fogel. University of Ottawa.
 %
 % Usage: EEGOUT = eeg_interp(EEG, badchans, good_elec);
@@ -72,8 +73,8 @@ end
 badchans = bad_elec;
 goodchans = good_elec;
 origoodchans = setdiff_bc(1:EEG.nbchan, badchans);
-EEG.data(badchans,:) = [];
-EEG.nbchan = length(goodchans);
+EEGtemp.data = EEG.data(goodchans,:);
+EEGtemp.nbchan = size(EEG.data,1);
 
 % get theta, rad of electrodes
 tmpgoodlocs = EEG.chanlocs(goodchans);
@@ -94,14 +95,10 @@ ybad = ybad./rad;
 zbad = zbad./rad;
 
 % interpolate using sperical spline method
-[~, ~, ~, badchansdata] = spheric_spline( xelec, yelec, zelec, xbad, ybad, zbad, EEG.data(goodchans,:));
+[~, ~, ~, badchansdata] = spheric_spline( xelec, yelec, zelec, xbad, ybad, zbad, EEGtemp.data);
 
 % put everything back together
-tmpdata = zeros(length(bad_elec), EEG.pnts, EEG.trials);
-tmpdata(origoodchans, :,:) = EEG.data;
-tmpdata(badchans,:,:) = badchansdata;
-EEG.data = tmpdata;
-EEG.nbchan = size(EEG.data,1);
+EEG.data(badchans,:) = badchansdata;
 EEG = eeg_checkset(EEG);
 
 end
