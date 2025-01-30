@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.5.2'; % updated interpolate to work with multiple bad channels
+vers = '1.5.3'; % updated to interpolate from a defined start point
 
 % handle input arguments from EEGLAB
 if nargin < 3

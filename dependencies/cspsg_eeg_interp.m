@@ -1,4 +1,4 @@
-function EEG = cspsg_eeg_interp(ORIEEG, bad_elec, good_elec)
+function EEG = cspsg_eeg_interp(ORIEEG, bad_elec, good_elec, interpStart)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -6,6 +6,8 @@ function EEG = cspsg_eeg_interp(ORIEEG, bad_elec, good_elec)
 %
 % 11-01-2023: Modified to work with Counting Sheep PSG.
 % 30-01-2025: Modified to interpolate multiple channels.
+% 30-01-2025: Modified to interpolate from a defined start point.
+%
 % Stuart Fogel. University of Ottawa.
 %
 % Usage: EEGOUT = eeg_interp(EEG, badchans, good_elec);
@@ -57,7 +59,7 @@ function EEG = cspsg_eeg_interp(ORIEEG, bad_elec, good_elec)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % handle input arguments
-if nargin < 3
+if nargin < 4
     help eeg_interp;
     return;
 end
@@ -97,8 +99,19 @@ zbad = zbad./rad;
 % interpolate using sperical spline method
 [~, ~, ~, badchansdata] = spheric_spline( xelec, yelec, zelec, xbad, ybad, zbad, EEGtemp.data);
 
+% add interpolated marker to channels
+for nCh=1:length(badchans)
+    EEG.event(end+1).type = 'Interpolated';
+    EEG.event(end).latency = interpStart*EEG.srate+1;
+    EEG.event(end).duration = EEG.pnts - EEG.event(end).latency; % modify event duration so that it goes from latency to the end of file
+    EEG.event(end).channel = EEG.chanlocs(badchans(nCh)).labels;
+    EEG = eeg_checkset(EEG, 'eventconsistency');
+end
+
 % put everything back together
-EEG.data(badchans,:) = badchansdata;
+for nCh=1:length(badchans)
+    EEG.data(badchans(nCh),interpStart*EEG.srate+1:end) = badchansdata(nCh,interpStart*EEG.srate+1:end);
+end
 EEG = eeg_checkset(EEG);
 
 end
