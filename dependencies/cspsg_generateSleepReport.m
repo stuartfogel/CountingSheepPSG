@@ -84,6 +84,8 @@ end
 summaryTable = struct('ID',cell(1,length(filename)), ...
                       'recStartTime',cell(1,length(filename)), ...
                       'recStopTime',cell(1,length(filename)), ...
+                      'lightsOFFtime',cell(1,length(filename)), ...
+                      'lightsONtime',cell(1,length(filename)), ...
                       'TRT',cell(1,length(filename)), ...
                       'TSWP',cell(1,length(filename)), ...
                       'TST',cell(1,length(filename)), ...
@@ -116,54 +118,66 @@ for nfile = 1:length(filename)
     % ID
     summaryTable(nfile).ID = filename{nfile}(1:end-4);
     % Recording Start Time
-    summaryTable(nfile).recStartTime = datestr(stageData.recStart,'dd-mm-yyyy HH:MM:SS.FFF');
+    summaryTable(nfile).recStartTime = datetime(datevec(stageData.recStart));
     % Recording Stop Time
-    summaryTable(nfile).recStopTime = datestr(addtodate(stageData.recStart,stageData.stageTime(end),'minute'),'dd-mm-yyyy HH:MM:SS.FFF');
+    summaryTable(nfile).recStopTime = datetime(datevec(stageData.recStart)) + minutes(stageData.stageTime(end));
+    % Lights OFF Time
+    summaryTable(nfile).lightsOFFtime = datetime(datevec(stageData.lightsOFF)); 
+    % Lights ON Time
+    summaryTable(nfile).lightsONtime = datetime(datevec(stageData.lightsON));
     % Total Recording Time
-    summaryTable(nfile).TRT = minutes(seconds(etime(datevec(summaryTable(nfile).recStopTime),datevec(summaryTable(nfile).recStartTime))));
-    % Total Sleep / Wake Period (Lights off to Lights on)
-    summaryTable(nfile).TSWP = minutes(seconds(etime(datevec(stageData.lightsON),datevec(stageData.lightsOFF))));
-    % Total Sleep Time
-    summaryTable(nfile).TST = minutes(seconds(sum(sum(stageData.stages' == 1:4,2)) * stageData.win));
-    % Sleep Onset Latency
-    summaryTable(nfile).SOL = stageData.stageTime(find(sum(stageData.stages' == 1:4,2),1));
+    summaryTable(nfile).TRT = minutes(datetime(summaryTable(nfile).recStopTime,'InputFormat','dd-MM-yyyy HH:mm:ss.SSS') - datetime(summaryTable(nfile).recStartTime,'InputFormat','dd-MM-yyyy HH:mm:ss.SSS'));
     % SE = Sleep Efficiency (TST / TSWP)
-    summaryTable(nfile).SE = (seconds(sum(sum(stageData.stages' == 1:4,2)) * stageData.win) / seconds(etime(datevec(stageData.lightsON),datevec(stageData.lightsOFF)))) * 100;
+    lOFFlatency = round(minutes(datetime(datevec(stageData.lightsOFF)) - datetime(datevec(stageData.recStart)))/0.5)*0.5; % find the latency of lights off in minutes, rounded to nearest 0.5 minute epoch
+    lONlatency = round(minutes(datetime(datevec(stageData.lightsON)) - datetime(datevec(stageData.recStart)))/0.5)*0.5; % find the latency of lights on in minutes, rounded to nearest 0.5 minute epoch
+    lOFFidx = find(stageData.stageTime == lOFFlatency); % find the epoch that has lights off 
+    lONidx = find([stageData.stageTime stageData.stageTime(end) + 0.5] == lONlatency); % find the epoch that has lights on, accounting for the last epoch at end of the recording
+    if lONidx == length(stageData.stages) + 1 % in case the lights ON tage is right at the end of the recording, round it down
+        lONidx = length(stageData.stages);
+    end
+    summaryTable(nfile).SE = round(((sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win) / seconds(datetime(datevec(stageData.lightsON)) - datetime(datevec(stageData.lightsOFF)))) * 100,2);
+    clear lOFFlatency lONlatency
+    % Total Sleep / Wake Period (Lights off to Lights on)
+    summaryTable(nfile).TSWP = stageData.stageTime(lONidx) - stageData.stageTime(lOFFidx);
+    % Total Sleep Time
+    summaryTable(nfile).TST = minutes(seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win));
+    % Sleep Onset Latency
+    summaryTable(nfile).SOL = stageData.stageTime(find(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2),1));
     % NA = Number of Awakenings
-    summaryTable(nfile).NA = length(find(find(diff(stageData.stages' == 0) == 1)));
+    summaryTable(nfile).NA = length(find(find(diff(stageData.stages(lOFFidx:lONidx)' == 0) == 1)));
     % Wake after Sleep Onset
     WASO = stageData.stages' == 0;
-    summaryTable(nfile).WASO = minutes(seconds(sum(WASO(find(sum(stageData.stages' == 1:4,2),1):end)) * stageData.win));
+    summaryTable(nfile).WASO = minutes(seconds(sum(WASO(find(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2),1):end)) * stageData.win));
     clear WASO
     % N1latency = Sleep Latency to N1
-    summaryTable(nfile).N1latency = minutes(minutes(stageData.stageTime(find(stageData.stages' == 1,1))));
+    summaryTable(nfile).N1latency = minutes(minutes(stageData.stageTime(find(stageData.stages(lOFFidx:lONidx)' == 1,1))));
     % N2latency = Sleep Latency to N2
-    summaryTable(nfile).N2latency = minutes(minutes(stageData.stageTime(find(stageData.stages' == 2,1))));
+    summaryTable(nfile).N2latency = minutes(minutes(stageData.stageTime(find(stageData.stages(lOFFidx:lONidx)' == 2,1))));
     % SWSlatency = Sleep Latency to SWS
-    summaryTable(nfile).SWSlatency = minutes(minutes(stageData.stageTime(find(stageData.stages' == 3,1))));
+    summaryTable(nfile).SWSlatency = minutes(minutes(stageData.stageTime(find(stageData.stages(lOFFidx:lONidx)' == 3,1))));
     % REMlatency = Sleep Latency to REM
-    summaryTable(nfile).REMlatency = minutes(minutes(stageData.stageTime(find(stageData.stages' == 4,1))));
+    summaryTable(nfile).REMlatency = minutes(minutes(stageData.stageTime(find(stageData.stages(lOFFidx:lONidx)' == 4,1))));
     % Unscored = Unscored Time
-    summaryTable(nfile).Unscored = minutes(seconds(sum(stageData.stages' == 5) * stageData.win));
+    summaryTable(nfile).Unscored = minutes(seconds(sum(stageData.stages(lOFFidx:lONidx)' == 5) * stageData.win));
     % WAKE = Wake Time
-    summaryTable(nfile).WAKE = minutes(seconds(sum(stageData.stages' == 0) * stageData.win));
+    summaryTable(nfile).WAKE = minutes(seconds(sum(stageData.stages(lOFFidx:lONidx)' == 0) * stageData.win));
     % N1 = N1 Time
-    summaryTable(nfile).N1 = minutes(seconds(sum(stageData.stages' == 1) * stageData.win));
+    summaryTable(nfile).N1 = minutes(seconds(sum(stageData.stages(lOFFidx:lONidx)' == 1) * stageData.win));
     % N2 = N2 Time
-    summaryTable(nfile).N2 = minutes(seconds(sum(stageData.stages' == 2) * stageData.win));
+    summaryTable(nfile).N2 = minutes(seconds(sum(stageData.stages(lOFFidx:lONidx)' == 2) * stageData.win));
     % SWS = SWS Time
-    summaryTable(nfile).SWS = minutes(seconds(sum(stageData.stages' == 3) * stageData.win));
+    summaryTable(nfile).SWS = minutes(seconds(sum(stageData.stages(lOFFidx:lONidx)' == 3) * stageData.win));
     % REM = REM Time
-    summaryTable(nfile).REM = minutes(seconds(sum(stageData.stages' == 4) * stageData.win));
+    summaryTable(nfile).REM = minutes(seconds(sum(stageData.stages(lOFFidx:lONidx)' == 4) * stageData.win));
     % N1percent = N1 % of TST
-    summaryTable(nfile).N1percent = (seconds(sum(stageData.stages' == 1) * stageData.win) / seconds(sum(sum(stageData.stages' == 1:4,2)) * stageData.win)) * 100;
+    summaryTable(nfile).N1percent = round((seconds(sum(stageData.stages(lOFFidx:lONidx)' == 1) * stageData.win) / seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win)) * 100,2);
     % N2percent = N2 % of TST
-    summaryTable(nfile).N2percent = (seconds(sum(stageData.stages' == 2) * stageData.win) / seconds(sum(sum(stageData.stages' == 1:4,2)) * stageData.win)) * 100;
+    summaryTable(nfile).N2percent = round((seconds(sum(stageData.stages(lOFFidx:lONidx)' == 2) * stageData.win) / seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win)) * 100,2);
     % SWSpercent = SWS % of TST
-    summaryTable(nfile).SWSpercent = (seconds(sum(stageData.stages' == 3) * stageData.win) / seconds(sum(sum(stageData.stages' == 1:4,2)) * stageData.win)) * 100;
+    summaryTable(nfile).SWSpercent = round((seconds(sum(stageData.stages(lOFFidx:lONidx)' == 3) * stageData.win) / seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win)) * 100,2);
     % REMpercent = REM % of TST
-    summaryTable(nfile).REMpercent = (seconds(sum(stageData.stages' == 4) * stageData.win) / seconds(sum(sum(stageData.stages' == 1:4,2)) * stageData.win)) * 100;
-    clear stageData
+    summaryTable(nfile).REMpercent = round((seconds(sum(stageData.stages(lOFFidx:lONidx)' == 4) * stageData.win) / seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win)) * 100,2);
+    clear stageData lOFFidx lONidx
 end
 
 % Save output file
