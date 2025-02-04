@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.5.5'; % included user manual. updated event properties for better R2024b compatability.
+vers = '1.5.6'; % improved precision of sleep report stats.
 
 % handle input arguments from EEGLAB
 if nargin < 3
