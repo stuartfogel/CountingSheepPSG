@@ -11,24 +11,27 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 Mac, PC and Linux compatible.  
-Designed for use with EEGLAB 2023 or later (https://eeglab.org) on Matlab R2020b or later (R2022b or later recommended).  
-For use on continuous EEGLAB datasets (*.set).  
+Designed for use with EEGLAB 2023 or later (https://EEGLAB.org) on MATLAB R2020b or later (R2022b or later recommended).  
+For use on continuous EEGLAB datasets.
+Requires: Signal Processing Toolbox.
+Requires: Statistics and Machine Learning Toolbox.
 
 Works best if recording includes (in the EEG.event structure):  
-* Recording start time event (at first data point).
+* Recording start time event (at first data point), event label format: 'yyyy-MM-dd HH:mm:ss.SSS'.
 * Lights Off and Lights On events.
 
 ## Installing
 
-Simply unzip 'countingSheepPSG' and add to Matlab path.  
-Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB GUI integration.  
+Simply unzip 'countingSheepPSG' and add to MATLAB path.  
+Alternatively, unzip and move folder to '~/EEGLAB/plugins/' directory for EEGLAB GUI integration.  
+Can also be installed and updated via EEGLAB main menu 'File > Manage EEGLAB extensions' (recommended).
 
 ## Usage
-
+See included 'User Manual.pdf' for details.
 1. Launch by typing 'countingSheepPSG' at command prompt.
 2. Customize display montage in:
 ~/montages/sleep_montage_default.m (rename and save to new file)
-3. Loads an EEGlab PSG dataset for signal preprocessing and annnotation.
+3. Load an EEGLAB PSG dataset for signal preprocessing and annotation.
 
 ### Supported Data Formats:
 
@@ -44,7 +47,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * 3 - SWS
 * 4 - REM
 * . - Unscored
-* backspace/delete - delete seelcted event(s)
+* backspace/delete - delete selected event(s)
 
 ### Event Marking Mode:
 
@@ -53,7 +56,7 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 * Enable 'all channels' mode to mark events without a channel
 * Single-click existing event to select/deselect for delete/merge
 
-### Signal processing (using built-in EEGlab functions)
+### Signal processing (using built-in EEGLAB functions)
 
 * interpolate bad channels
 * downsampling
@@ -67,8 +70,8 @@ Alternatively, unzip and move folder to '~/eeglab/plugins/' directory for EEGLAB
 ### Automatic Event Detection:
 
 * Automatic movement artifact detection
-* Automatic spindle detection (using EEGlab 'detect_spindles' plugin)
-* Automatic slow wave detection (using EEGlab 'PAA' plugin)
+* Automatic spindle detection (using EEGLAB 'detect_spindles' plugin)
+* Automatic slow wave detection (using EEGLAB 'PAA' plugin)
 * Spindle-slow wave coupling analysis (coming soon...)
 * Automatic rapid eye movement detection (coming soon...)
     
@@ -80,7 +83,7 @@ uOttawa Sleep Research Laboratory.
 
 A revision of sleepSMG. sleepSMG originally developed by:  
 Stephanie Greer and Jared Saletin.  
-Walker Lab, UC Berekeley, 2011.  
+Walker Lab, UC Berkeley, 2011.  
 https://sleepsmg.sourceforge.net  
 https://www.jaredsaletin.org/hume  
 
@@ -89,6 +92,13 @@ https://www.jaredsaletin.org/hume
 https://www.uottawa-sleeplab.ca  
 https://www.sleepwellpsg.com  
 sfogel@uottawa.ca  
+
+## HOW TO CITE:
+
+L.B. Ray, D. Baena & S.M. Fogel (2024). “Counting sheep PSG”: EEGLAB-compatible
+open-source MATLAB software for signal processing, visualization, event marking
+and staging of polysomnographic data, Journal of Neuroscience Methods, 407, 110162.
+https://doi.org/10.1016/j.jneumeth.2024.110162.
 
 ## License
 
