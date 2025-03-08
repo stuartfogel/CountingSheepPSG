@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.6.1'; % More checks to improve backwards compatability for date format. Fixed save progress dialog.
+vers = '1.6.2'; % More checks to improve backwards compatability for date format. Fixed save progress dialog.
 
 % handle input arguments from EEGLAB
 if nargin < 3

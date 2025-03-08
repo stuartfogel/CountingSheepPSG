@@ -12,8 +12,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 Mac, PC and Linux compatible.  
 Designed for use with EEGLAB 2023 or later (https://EEGLAB.org) on MATLAB R2020b or later (R2022b or later recommended).  
-For use on continuous EEGLAB datasets.
-Requires: Signal Processing Toolbox.
+For use on continuous EEGLAB datasets.  
+Requires: Signal Processing Toolbox.  
 Requires: Statistics and Machine Learning Toolbox.
 
 Works best if recording includes (in the EEG.event structure):  
