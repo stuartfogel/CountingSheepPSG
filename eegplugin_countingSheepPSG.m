@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.7.2'; % Added batch mode for movement detection. Ironed out a few kinks for other new batch modes.
+vers = '1.7.3'; % scoring toolbar now accessible during event marking mode
 
 % handle input arguments from EEGLAB
 if nargin < 3
