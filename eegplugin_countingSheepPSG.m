@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.7.3'; % scoring toolbar now accessible during event marking mode
+vers = '1.8'; % New feature: batch pre-processing
 
 % handle input arguments from EEGLAB
 if nargin < 3

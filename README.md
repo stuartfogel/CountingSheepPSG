@@ -61,11 +61,11 @@ See included 'User Manual.pdf' for details.
 * interpolate bad channels
 * downsampling
 * filtering
-* re-referencing (beta)
+* re-referencing
 * channel edit (beta)
 * Independent component analysis (ICA)
 * Artifact Subspace Reconstruction (ASR)
-* Power spectral analysis - FTT (beta)
+* Power spectral analysis - FTT
 
 ### Automatic Event Detection:
 
@@ -75,6 +75,8 @@ See included 'User Manual.pdf' for details.
 * Spindle-slow wave coupling analysis (coming soon...)
 * Automatic rapid eye movement detection (coming soon...)
     
+### Batch modes for preprocessing and event detection
+
 ## Authors
 
 Stuart Fogel & Sleep Well.  
