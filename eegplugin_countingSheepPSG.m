@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.8.1'; % New feature: batch edit channels
+vers = '1.8.2'; % version check added. updated registration check.
 
 % handle input arguments from EEGLAB
 if nargin < 3
