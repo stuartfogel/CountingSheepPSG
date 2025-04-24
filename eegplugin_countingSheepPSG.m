@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.8.2'; % version check added. updated registration check.
+vers = '1.8.3'; % fixed issue for deleting event with exact same latency as another.
 
 % handle input arguments from EEGLAB
 if nargin < 3
