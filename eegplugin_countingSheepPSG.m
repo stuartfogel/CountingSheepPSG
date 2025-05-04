@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.8.4'; % updated registration code generation for improved compatability.
+vers = '1.8.5'; % Added launch splash screen
 
 % handle input arguments from EEGLAB
 if nargin < 3
