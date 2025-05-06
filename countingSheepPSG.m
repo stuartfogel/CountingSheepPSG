@@ -2,6 +2,8 @@ function countingSheepPSG
 
 %% Launch splash screen prior to launch app
 
+% kudos to julianfperez for this code
+
 % add directories to path
 sleepPath = which('countingSheepPSG');
 addpath(genpath(fileparts(sleepPath)));
