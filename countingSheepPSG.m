@@ -1,4 +1,4 @@
-function countingSheepPSG
+function countingSheepPSG(EEG)
 
 %% Launch splash screen prior to launch app
 
@@ -27,6 +27,10 @@ set(fh,'Visible','on');
 pause(3);
 close(fh);
 
-countingSheepPSGapp
+if nargin < 1
+    countingSheepPSGapp
+else
+    countingSheepPSGapp(EEG)
+end
 
 end
