@@ -2,12 +2,11 @@ function countingSheepPSG(EEG)
 
 %% Launch splash screen prior to launch app
 
-% kudos to julianfperez for this code
-
 % add directories to path
 sleepPath = which('countingSheepPSG');
 addpath(genpath(fileparts(sleepPath)));
 
+% kudos to julianfperez for this code
 % create a figure that is not visible yet, and has minimal titlebar properties
 fh = figure('Visible','off','MenuBar','none','NumberTitle','off','DockControls','off');
 % put an axes in it

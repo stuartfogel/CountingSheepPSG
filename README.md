@@ -62,7 +62,7 @@ See included 'User Manual.pdf' for details.
 * downsampling
 * filtering
 * re-referencing
-* channel edit (beta)
+* channel edit
 * Independent component analysis (ICA)
 * Artifact Subspace Reconstruction (ASR)
 * Power spectral analysis - FTT
@@ -72,10 +72,10 @@ See included 'User Manual.pdf' for details.
 * Automatic movement artifact detection
 * Automatic spindle detection (using EEGLAB 'detect_spindles' plugin)
 * Automatic slow wave detection (using EEGLAB 'PAA' plugin)
+* Automatic rapid eye movement detection
 * Spindle-slow wave coupling analysis (coming soon...)
-* Automatic rapid eye movement detection (coming soon...)
     
-### Batch modes for preprocessing and event detection
+### Batch modes available for preprocessing and event detection
 
 ## Authors
 
@@ -87,7 +87,6 @@ A revision of sleepSMG. sleepSMG originally developed by:
 Stephanie Greer and Jared Saletin.  
 Walker Lab, UC Berkeley, 2011.  
 https://sleepsmg.sourceforge.net  
-https://www.jaredsaletin.org/hume  
 
 ## Contact 
 

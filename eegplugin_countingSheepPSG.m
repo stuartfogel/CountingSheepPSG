@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.9'; % fixed dataset load issue when using EEG as input argument
+vers = '1.9.1'; % improved error handling for update and registration
 
 % handle input arguments from EEGLAB
 if nargin < 3
