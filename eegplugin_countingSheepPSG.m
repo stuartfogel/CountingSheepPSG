@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.10'; % email provider blocked sendmail. temporary fix. 
+vers = '1.11'; % email provider service restored. registration temp fix removed.  
 
 % handle input arguments from EEGLAB
 if nargin < 3
