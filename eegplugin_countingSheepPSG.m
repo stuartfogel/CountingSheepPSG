@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.13'; % optimized event display time
+vers = '1.14'; % optimized disaply of traces and events
 
 % handle input arguments from EEGLAB
 if nargin < 3
