@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.15'; % minor fix for handling MATLAB version for new facealpha property for rectangles
+vers = '1.16'; % minor fix to speed up finding lights on/off tags
 
 % handle input arguments from EEGLAB
 if nargin < 3
