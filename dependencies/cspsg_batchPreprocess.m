@@ -108,7 +108,7 @@ else
         [~,dsOpt] = pop_resample(EEG); % get resample options using EEGLAB pop function
         clear EEG
         %% RUN PREPROCESSING
-        if isempty(rerefOpt) && isempty(filtOpt{:}) && isempty(dsOpt)
+        if isempty(rerefOpt) && isempty(filtOpt) && isempty(dsOpt)
             return % all steps cancelled by user. But why?
         else
             %% PREPROCESS EACH FILE
@@ -119,28 +119,28 @@ else
                 EEG = eeg_checkset(EEG);
                 disp(['File: ',filename{1,nfile},' loaded'])
                 %% UPDATE FILE NAME AND SET NAME INFO
-                if ~isempty(rerefOpt) && isempty(filtOpt{:}) && isempty(dsOpt)
+                if ~isempty(rerefOpt) && isempty(filtOpt) && isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_reref'));
                 end
-                if isempty(rerefOpt) && ~isempty(filtOpt{:}) && isempty(dsOpt)
+                if isempty(rerefOpt) && ~isempty(filtOpt) && isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_filt'));
                 end
-                if isempty(rerefOpt) && isempty(filtOpt{:}) && ~isempty(dsOpt)
+                if isempty(rerefOpt) && isempty(filtOpt) && ~isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_ds'));
                 end
-                if ~isempty(rerefOpt) && ~isempty(filtOpt{:}) && isempty(dsOpt)
+                if ~isempty(rerefOpt) && ~isempty(filtOpt) && isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_reref_filt'));
                 end
-                if isempty(rerefOpt) && ~isempty(filtOpt{:}) && ~isempty(dsOpt)
+                if isempty(rerefOpt) && ~isempty(filtOpt) && ~isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_filt_ds'));
                 end
-                if ~isempty(rerefOpt) && isempty(filtOpt{:}) && ~isempty(dsOpt)
+                if ~isempty(rerefOpt) && isempty(filtOpt) && ~isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_reref_ds'));
                 end
-                if ~isempty(rerefOpt) && ~isempty(filtOpt{:}) && ~isempty(dsOpt)
+                if ~isempty(rerefOpt) && ~isempty(filtOpt) && ~isempty(dsOpt)
                     EEG.setname=char(strcat(filename{1,nfile}(1:end-4),'_reref_filt_ds'));
                 end
-                if isempty(rerefOpt) && isempty(filtOpt{:}) && isempty(dsOpt)
+                if isempty(rerefOpt) && isempty(filtOpt) && isempty(dsOpt)
                     error('INVALID PARAMETER: CHOOSE AT LEAST ONE PREPROCESSING STEP!')
                 end
                 EEG.filename = char(strcat(EEG.setname,'.set'));
@@ -160,7 +160,7 @@ else
                 end
                 %% 2) FILTER BASED ON CHANNEL TYPE
                 try
-                    if ~isempty(filtOpt{:})
+                    if ~isempty(filtOpt)
                         progress = uiprogressdlg(app.figure1,'Title','Filtering Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
                         for nFilt = 1:length(filtOpt)
                             eval(filtOpt{nFilt}); % run filter using history options

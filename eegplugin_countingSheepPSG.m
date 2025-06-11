@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.16'; % minor fix to speed up finding lights on/off tags
+vers = '1.17'; % fixed issue when filtering multiple channel types
 
 % handle input arguments from EEGLAB
 if nargin < 3
