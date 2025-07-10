@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.19'; % More MATLAB R2025a compatability updates. Other error-catching, minor performace and code enhancements.
+vers = '1.20'; % New feature: Slow Wave - Spindle coupling! Even more MATLAB R2025a and PC compatability updates. Other minor performace and code enhancements.
 
 % handle input arguments from EEGLAB
 if nargin < 3
