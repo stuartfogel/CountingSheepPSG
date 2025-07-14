@@ -128,19 +128,19 @@ for nfile = 1:length(filename)
     % Total Recording Time
     summaryTable(nfile).TRT = minutes(datetime(summaryTable(nfile).recStopTime,'InputFormat','dd-MM-yyyy HH:mm:ss.SSS') - datetime(summaryTable(nfile).recStartTime,'InputFormat','dd-MM-yyyy HH:mm:ss.SSS'));
     % SE = Sleep Efficiency (TST / TSWP)
-    lOFFlatency = round(minutes(datetime(datevec(stageData.lightsOFF)) - datetime(datevec(stageData.recStart)))/0.5)*0.5; % find the latency of lights off in minutes, rounded to nearest 0.5 minute epoch
-    lONlatency = round(minutes(datetime(datevec(stageData.lightsON)) - datetime(datevec(stageData.recStart)))/0.5)*0.5; % find the latency of lights on in minutes, rounded to nearest 0.5 minute epoch
+    lOFFlatency = ceil(minutes(datetime(datevec(stageData.lightsOFF)) - datetime(datevec(stageData.recStart)))/(stageData.win/60))*(stageData.win/60); % find the latency of lights off in minutes, rounded to nearest epoch
+    lONlatency = floor(minutes(datetime(datevec(stageData.lightsON)) - datetime(datevec(stageData.recStart)))/(stageData.win/60))*(stageData.win/60); % find the latency of lights on in minutes, rounded to nearest epoch
     lOFFidx = find(stageData.stageTime == lOFFlatency); % find the epoch that has lights off 
-    lONidx = find([stageData.stageTime stageData.stageTime(end) + 0.5 stageData.stageTime(end) + 1] == lONlatency); % find the epoch that has lights on, accounting for the last epoch at end of the recording
-    if lONidx == length(stageData.stages) + 1 || lONidx == length(stageData.stages) + 2 % in case the lights ON tage is right at the end of the recording, round it down
+    lONidx = find([stageData.stageTime stageData.stageTime(end) + stageData.win/60 stageData.stageTime(end) + 1] == lONlatency); % find the epoch that has lights on, accounting for the last epoch at end of the recording
+    if lONidx == length(stageData.stages) + 1 || lONidx == length(stageData.stages) + 2 % in case the lights ON tag is right at the end of the recording, round it down
         lONidx = length(stageData.stages);
     end
     summaryTable(nfile).SE = round(((sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win) / seconds(datetime(datevec(stageData.lightsON)) - datetime(datevec(stageData.lightsOFF)))) * 100,2);
     clear lOFFlatency lONlatency
     % Total Sleep / Wake Period (Lights off to Lights on)
-    summaryTable(nfile).TSWP = stageData.stageTime(lONidx) - stageData.stageTime(lOFFidx);
+    summaryTable(nfile).TSWP = stageData.stageTime(lONidx) - stageData.stageTime(lOFFidx) + stageData.win/60;
     % Total Sleep Time
-    summaryTable(nfile).TST = minutes(seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2)) * stageData.win));
+    summaryTable(nfile).TST = minutes(seconds(sum(sum(stageData.stages(lOFFidx:lONidx)' == 1:4)) * stageData.win));
     % Sleep Onset Latency
     summaryTable(nfile).SOL = stageData.stageTime(find(sum(stageData.stages(lOFFidx:lONidx)' == 1:4,2),1));
     % NA = Number of Awakenings
