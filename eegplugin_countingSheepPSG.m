@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.21'; % Fixed rounding imprecision in sleep reports. Minor improvements and error-catching.
+vers = '1.22'; % New and improved montage editor!
 
 % handle input arguments from EEGLAB
 if nargin < 3
