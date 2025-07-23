@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.23'; % Hardened code for new montage editor. Fixed glitchy issue with R2025a maximizing window. 
+vers = '1.24'; % Minor tweaks.
 
 % handle input arguments from EEGLAB
 if nargin < 3
