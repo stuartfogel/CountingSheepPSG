@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.24'; % Minor tweaks.
+vers = '1.25'; % Fixed issue when new montage had very high number of channels. Added ability to edit setname.
 
 % handle input arguments from EEGLAB
 if nargin < 3
