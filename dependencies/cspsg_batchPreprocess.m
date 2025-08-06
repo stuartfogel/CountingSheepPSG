@@ -34,7 +34,7 @@ dlgQuestion = ['The following steps are part of the batch pre-processing: ' newl
     '4. Prompt to select Filter settings (optional)' newline 'Note: new optional prompt for each channel type' newline newline ...
     '5. Prompt to select Downsampling settings (optional)' newline newline ...
     'Do you want to continue?'];
-choice = uiconfirm(app.figure1,dlgQuestion,dlgTitle,'Options',{'No','Next >>'});
+choice = uiconfirm(app.CountingSheepMain,dlgQuestion,dlgTitle,'Options',{'No','Next >>'});
 if strcmp(choice,'No')
     return
 end
@@ -66,25 +66,25 @@ else
         %% VERIFY THAT CHANLOCS AND SRATE ARE ALL IDENTICAL
         if length(filename) > 1
             for nfile = 1:length(filename)
-                progress = uiprogressdlg(app.figure1,'Title','Verifying Datasets','Indeterminate','on'); progress.Message = ['Verifying that channel information and sampling rate are consistent. ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
+                progress = uiprogressdlg(app.CountingSheepMain,'Title','Verifying Datasets','Indeterminate','on'); progress.Message = ['Verifying that channel information and sampling rate are consistent. ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
                 EEG = pop_loadset('filename',filename{1,nfile},'filepath',pathname);
                 chanlocs{nfile} = EEG.chanlocs;
                 % chaninfo{nfile} = EEG.chaninfo; % not implemented, but might be needed in the future?
                 srate{nfile} = EEG.srate;
             end
             if ~isequaln(chanlocs{1:end}) % checks that all fieldnames and field values are identical
-                choice = uiconfirm(app.figure1,['Channel information is not identical for all datasets.' newline newline 'Check dataset channel information.'],'Input Error','Icon','error');
+                choice = uiconfirm(app.CountingSheepMain,['Channel information is not identical for all datasets.' newline newline 'Check dataset channel information.'],'Input Error','Icon','error');
                 waitfor(choice);
                 return
             end
             if ~isequaln(srate{1:end}) % checks that all fieldnames and field values are identical
-                choice = uiconfirm(app.figure1,['Sampling rate is not identical for all datasets.' newline newline 'Check dataset sampling rate.'],'Input Error','Icon','error');
+                choice = uiconfirm(app.CountingSheepMain,['Sampling rate is not identical for all datasets.' newline newline 'Check dataset sampling rate.'],'Input Error','Icon','error');
                 waitfor(choice);
                 return
             end
             clear chanlocs srate
         else
-            progress = uiprogressdlg(app.figure1,'Title','Loading Dataset','Indeterminate','on');
+            progress = uiprogressdlg(app.CountingSheepMain,'Title','Loading Dataset','Indeterminate','on');
             EEG = pop_loadset('filename',filename{1,1},'filepath',pathname);
         end
         close(progress);
@@ -97,12 +97,12 @@ else
         if ~isempty(filtOpt{1})
             dlgTitle = 'Filter additional channel types?';
             dlgQuestion = 'Do you want to filter an additional group/type of channels?';
-            choice = uiconfirm(app.figure1,dlgQuestion,dlgTitle,'Options',{'Yes','No'});
+            choice = uiconfirm(app.CountingSheepMain,dlgQuestion,dlgTitle,'Options',{'Yes','No'});
             while strcmp(choice,'Yes')
                 [~,filtOpt{end+1}] = pop_eegfiltnew(EEG); % get filter options using EEGLAB pop function
                 dlgTitle = 'Filter additional channel types?';
                 dlgQuestion = 'Do you want to filter an additional group/type of channels?';
-                choice = uiconfirm(app.figure1,dlgQuestion,dlgTitle,'Options',{'Yes','No'});
+                choice = uiconfirm(app.CountingSheepMain,dlgQuestion,dlgTitle,'Options',{'Yes','No'});
             end
         end
         [~,dsOpt] = pop_resample(EEG); % get resample options using EEGLAB pop function
@@ -114,7 +114,7 @@ else
             %% PREPROCESS EACH FILE
             for nfile = 1:length(filename)
                 %% LOAD DATASET
-                progress = uiprogressdlg(app.figure1,'Title','Loading Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
+                progress = uiprogressdlg(app.CountingSheepMain,'Title','Loading Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
                 EEG = pop_loadset('filename',filename{1,nfile},'filepath',pathname);
                 EEG = eeg_checkset(EEG);
                 disp(['File: ',filename{1,nfile},' loaded'])
@@ -150,35 +150,35 @@ else
                 %% 1) RE-REFERENCE
                 try
                     if ~isempty(rerefOpt)
-                        progress = uiprogressdlg(app.figure1,'Title','Re-referencing Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
+                        progress = uiprogressdlg(app.CountingSheepMain,'Title','Re-referencing Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
                         eval(rerefOpt); % run re-referenceing using history options
                     end
                 catch
-                    choice = uiconfirm(app.figure1,'Re-Referencing failed. Check study-specific parameters.','Input Error','Icon','error');
+                    choice = uiconfirm(app.CountingSheepMain,'Re-Referencing failed. Check study-specific parameters.','Input Error','Icon','error');
                     waitfor(choice);
                     return
                 end
                 %% 2) FILTER BASED ON CHANNEL TYPE
                 try
                     if ~isempty(filtOpt)
-                        progress = uiprogressdlg(app.figure1,'Title','Filtering Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
+                        progress = uiprogressdlg(app.CountingSheepMain,'Title','Filtering Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
                         for nFilt = 1:length(filtOpt)
                             eval(filtOpt{nFilt}); % run filter using history options
                         end
                     end
                 catch
-                    choice = uiconfirm(app.figure1,'Filtering failed. Check study-specific parameters.','Input Error','Icon','error');
+                    choice = uiconfirm(app.CountingSheepMain,'Filtering failed. Check study-specific parameters.','Input Error','Icon','error');
                     waitfor(choice);
                     return
                 end
                 %% 3) DOWNSAMPLE
                 try
                     if ~isempty(dsOpt)
-                        progress = uiprogressdlg(app.figure1,'Title','Downsampling Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
+                        progress = uiprogressdlg(app.CountingSheepMain,'Title','Downsampling Dataset','Indeterminate','on'); progress.Message = ['Processing dataset ' num2str(nfile) ' of ' num2str(length(filename)) ' ...'];
                         eval(dsOpt); % run downsample using history options
                     end
                 catch
-                    choice = uiconfirm(app.figure1,'Downsampling failed. Check study-specific parameters.','Input Error','Icon','error');
+                    choice = uiconfirm(app.CountingSheepMain,'Downsampling failed. Check study-specific parameters.','Input Error','Icon','error');
                     waitfor(choice);
                     return
                 end
@@ -186,11 +186,11 @@ else
                 if exist([outputPath outputFile],'file') == 2
                     dlgTitle = 'Warning!';
                     dlgQuestion = ['Overwrite protection enabled.' newline newline 'Do you want to overwrite existing files with same file name?'];
-                    choice = uiconfirm(app.figure1,dlgQuestion,dlgTitle,'Options',{'Yes','No'});
+                    choice = uiconfirm(app.CountingSheepMain,dlgQuestion,dlgTitle,'Options',{'Yes','No'});
                     if strcmp(choice,'Yes')
                         pop_saveset(EEG, 'filename',outputFile,'filepath',outputPath, 'savemode','onefile');
                     else
-                        choice = uiconfirm(app.figure1,'User cancelled batch. Files not saved.','Error','Icon','error');
+                        choice = uiconfirm(app.CountingSheepMain,'User cancelled batch. Files not saved.','Error','Icon','error');
                         waitfor(choice);
                         return
                     end
@@ -200,7 +200,7 @@ else
                 end
                 close(progress);
             end
-            choice = uiconfirm(app.figure1,'Batch pre-processing complete!','Batch Processing','Icon','success');
+            choice = uiconfirm(app.CountingSheepMain,'Batch pre-processing complete!','Batch Processing','Icon','success');
             waitfor(choice);
         end
     end
