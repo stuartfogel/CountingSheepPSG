@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.26'; % Updated dependencies with new main figure window name.
+vers = '1.27'; % minor fix when displaying ICA components.
 
 % handle input arguments from EEGLAB
 if nargin < 3
