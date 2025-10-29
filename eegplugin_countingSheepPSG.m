@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.29'; % force save of stages to backup mat on close dataset. Display ICA menu item after running ICA.
+vers = '1.30'; % Improved movement detection using RMS envelope instead of 1st derivative. Force save of stages to backup mat on close dataset. Display ICA menu item after running ICA.
 
 % handle input arguments from EEGLAB
 if nargin < 3
