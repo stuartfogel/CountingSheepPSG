@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.31'; % minor fix on clear/close and save behaviour.
+vers = '1.32'; % added feature to NaN data outside Lights off/Lights on tags
 
 % handle input arguments from EEGLAB
 if nargin < 3
