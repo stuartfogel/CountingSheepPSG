@@ -95,7 +95,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.34'; % remove lights on/off tags from delete event dialog to avoid issues.
+vers = '1.35'; % minor update to edit setname function
 
 % handle input arguments from EEGLAB
 if nargin < 3
