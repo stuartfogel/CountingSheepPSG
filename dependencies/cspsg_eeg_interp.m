@@ -52,9 +52,10 @@ function EEG = cspsg_eeg_interp(ORIEEG, bad_elec, good_elec, interpStart)
 % CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 % ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 % THE POSSIBILITY OF SUCH DAMAGE.
-%
-% Counting Sheep PSG is intended for research purposes only. Any commercial 
-% or medical use of this software and source code is strictly prohibited.
+% 
+% THIS SOFTWARE IS INTENDED FOR RESEARCH PURPOSES ONLY. ANY COMMERCIAL 
+% USE OR MEDICAL USE OF THIS SOFTWARE AND SOURCE CODE IS STRICTLY 
+% PROHIBITED.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
