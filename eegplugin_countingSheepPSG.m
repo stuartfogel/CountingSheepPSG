@@ -102,7 +102,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.43'; % handle event display issue when EEGLAB 'boundary' events have NaN as duration
+vers = '1.44'; % registration process update
 
 % handle input arguments from EEGLAB
 if nargin < 3
