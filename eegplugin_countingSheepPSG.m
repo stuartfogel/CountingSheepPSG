@@ -102,7 +102,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.44'; % registration process update
+vers = '1.45'; % minor fix to brute-force edf import and auto light on/off tag insert
 
 % handle input arguments from EEGLAB
 if nargin < 3
