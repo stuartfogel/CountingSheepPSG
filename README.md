@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 Mac, PC and Linux compatible.  
-Designed for use with EEGLAB 2023 or later (https://EEGLAB.org) on MATLAB R2020b or later (R2022b or later recommended).  
+Designed for use with EEGLAB 2023 or later (https://EEGLAB.org) on MATLAB R2024a or later.  
 For use on continuous EEGLAB datasets.  
 Requires: Signal Processing Toolbox.  
 Requires: Statistics and Machine Learning Toolbox.

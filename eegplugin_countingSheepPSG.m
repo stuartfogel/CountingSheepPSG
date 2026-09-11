@@ -19,7 +19,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 % Dec 28, 2022: Version 1.0
 %
 % REQUIREMENTS:
-% MATLAB version R2020a or later
+% MATLAB version R2024a or later
 % EEGlab 2020 or later (https://eeglab.org)
 %
 % USAGE:
@@ -102,7 +102,7 @@ function vers = eegplugin_countingSheepPSG(fig, trystrs, catchstrs)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % version
-vers = '1.46'; % minor fix to improve backward compatability for themes with R2023a
+vers = '1.47'; % updated minimum requirements for R2024a
 
 % handle input arguments from EEGLAB
 if nargin < 3
